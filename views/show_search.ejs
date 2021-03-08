@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog App</title>
+   
+  </head>
+  <body style="background-image: linear-gradient(to right, rgba(26, 157, 228, 0.267), rgb(225, 233, 233));">
+    <%- include layout%>
+    <!-- Page Content -->
+    <div class="container">
+  
+      <div class="row">
+  
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+          <%if(posts.length>0){%>
+               <h3 class="my-4">บทความ "<%=name_search%>"</h3>
+               <hr>
+  
+               <!-- Blog Post -->
+               <%posts.forEach(post=>{ %>
+                    <div class="card mb-4">
+                    <a href="/show/<%=post._id%>"><img class="card-img-top" src="<%=post.img%>" width="50%" height="50%"></a>
+                    <div class="card-body">
+                         <h2 class="card-title"><%=post.title%></h2>
+                         <p class="card-text"><%-littleString(post.content,300)%></p>
+                         <a href="/show/<%=post._id%>" class="btn btn-primary">Read More &rarr;</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                         Posted on <%=moment(post.date).format("DD-MM-YY")%> by
+                         <a href="/posts/search/?author=<%=post.author%>"><%=post.author%></a>,
+                         <a href="/posts/search/?category=<%=post.category%>"><%=post.category%></a>
+                    </div>
+                    </div> 
+               <%})%>
+          <%}else{%>
+               <h3 class="my-4">ไม่พบบทความ "<%=name_search%>"</h3>
+               <hr>
+          <%}%>
+        </div>
+  
+        <!-- Sidebar Widgets Column -->
+        <%-include sidebar%>
+  
+      </div>
+      <!-- /.row -->
+  
+    </div>
+    <!-- /.container -->
+  
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Air Natthaphon</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+  </body>
+</html>

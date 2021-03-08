@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta name="description" content="">
+     <meta name="author" content="">
+
+     <title>Blog App</title>
+
+</head>
+
+<body>
+     <%-include layout%>
+     <!-- Page Content -->
+     <div class="container">
+
+          <div class="row">
+
+               <!-- Post Content Column -->
+               <div class="col-lg-8">
+                    <%posts.forEach(post=>{%>
+                         <!-- Title -->
+                         <h1 class="mt-4"><%=post.title%></h1>
+
+                         <!-- Author -->
+                         <p class="lead">
+                              by
+                              <a href="/posts/search/?author=<%=post.author%>"><%=post.author%></a>
+                         </p>
+
+                         <hr>
+
+                         <!-- Date/Time -->
+                         <p>Posted on <%=moment(post.data).format("DD-MM-YY , hh:mm:ss a ")%> %></p>
+
+                         <hr>
+
+                         <!-- Preview Image -->
+                         <img class="img-fluid rounded" src="<%=post.img%>" alt="">
+
+                         <hr>
+
+                         <!-- Post Content -->
+                         <p class="lead"><%-post.content%></p>
+                         <hr>
+                         <!-- Sidebar Widgets Column -->
+                    <%})%>
+               </div>
+               <%include sidebar%>
+               <!-- /.row -->
+
+          </div>
+          <!-- /.container -->
+     </div>
+      <!-- Footer -->
+      <footer class="py-5 bg-dark">
+          <div class="container">
+               <p class="m-0 text-center text-white">Copyright &copy; Air Natthaphon</p>
+          </div>
+          <!-- /.container -->
+     </footer>
+</body>
+
+</html>

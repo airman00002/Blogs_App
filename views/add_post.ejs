@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+     <title>Blog App</title>
+</head>
+<body style="background-image: linear-gradient(to right, rgba(26, 157, 228, 0.267), rgb(225, 233, 233));">
+     <%-include layout%>
+     <div class="container offset-lg-4 offset-md-3 col-lg-4 col-md-6 my-4">
+          <div class="head_title" align="center">
+               <h2><strong>เขียนบทความ</strong></h2>
+          </div>
+<!--TODO--------Error ------------------------------------------------------------------>
+          <div class="error">
+               <%if(locals.errors){%>
+                    <ul class="alert alert-danger">
+                         <%errors.forEach(error=>{%>
+                         <li class="mx-2"><%=error.msg%></li>
+                         <%})%>
+                    </ul>
+               <%}%>
+          </div>
+
+<!--TODO--------form ------------------------------------------------------------------>
+          <form action="/post/add" method="post">
+               <div class="form-group">
+                    <label><strong>หัวข้อ</strong></label>     
+                    <input type="text" name="title" class="form-control">
+               </div>
+               <%if(locals.categories){%>
+               <div class="form-group">
+                    <label><strong>หมวดหมู่</strong></label>     
+                    <select name="category" class="form-control">
+                         <%categories.forEach(category=>{%>
+                         <option value="<%=category.name%>"><%=category.name%></option>
+                         <%})%>
+                    </select>
+               </div>
+               <%}%>
+               <div class="form-group">
+                    <label><strong>เนื้อหา</strong></label>     
+                    <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+               </div>
+
+               <div class="form-group">
+                    <label ><strong>ภาพปก</strong></label>
+                    <input type="text" name="img"  class="form-control">
+               </div>
+
+               <div class="form-group">
+                    <label ><strong>ผู้เขียน</strong></label>
+                    <input type="text" name="author"  class="form-control">
+               </div>
+               
+                   
+               <div class="form-group" align="center">
+                     <input type="submit" value="บันทึกบทความ" class="btn btn-outline-primary">
+               </div>  
+          </form>
+     </div>
+     <script>
+          CKEDITOR.replace( 'content' );
+  </script>
+</body>
+</html>
